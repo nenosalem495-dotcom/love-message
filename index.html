@@ -3,83 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Love Message ❤️</title>
+    <title>Dense Heart Love Effect</title>
     <style>
         body {
-            background-color: #fff0f3;
-            font-family: Tahoma, sans-serif;
-            text-align: center;
-            padding-top: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #0b0b0b;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
             margin: 0;
         }
-        h2 {
-            color: #d63384;
+
+        .click-btn {
+            padding: 14px 30px;
             font-size: 22px;
-            margin-bottom: 30px;
-        }
-        .heart-container {
-            position: relative;
-            display: inline-block;
+            background-color: #ff2a5f;
+            color: white;
+            border: none;
+            border-radius: 35px;
             cursor: pointer;
-            transition: transform 0.3s ease;
+            box-shadow: 0 4px 20px rgba(255, 42, 95, 0.5);
+            transition: 0.3s;
+            z-index: 10;
             margin-bottom: 20px;
         }
-        .heart-container:hover {
-            transform: scale(1.1);
+
+        .click-btn:hover {
+            background-color: #e01b4d;
+            transform: scale(1.08);
         }
-        .heart {
-            background-color: #ff3366;
-            display: inline-block;
-            height: 120px;
-            margin: 0 10px;
+
+        .heart-container {
             position: relative;
-            transform: rotate(-45deg);
-            width: 120px;
-            box-shadow: 0 10px 25px rgba(255, 51, 102, 0.4);
+            width: 450px;
+            height: 450px;
         }
-        .heart:before,
-        .heart:after {
-            content: "";
-            background-color: #ff3366;
-            border-radius: 50%;
-            height: 120px;
+
+        .love-word {
             position: absolute;
-            width: 120px;
-        }
-        .heart:before {
-            top: -60px;
-            left: 0;
-        }
-        .heart:after {
-            left: 60px;
-            top: 0;
-        }
-        .text-inside {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(45deg);
-            color: white;
+            color: #ff3366;
+            font-size: 11px;
             font-weight: bold;
-            font-size: 15px;
-            z-index: 10;
-            width: 100px;
-            text-align: center;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-        #message {
-            margin-top: 30px;
-            font-size: 32px;
-            color: #e60026;
-            font-weight: bold;
-            display: none;
             opacity: 0;
-            transform: scale(0.5);
+            transform: scale(0);
             transition: all 0.5s ease-in-out;
-            text-shadow: 0 2px 10px rgba(230, 0, 38, 0.3);
+            white-space: nowrap;
+            text-shadow: 0 0 5px rgba(255, 51, 102, 0.6);
         }
-        #message.show {
-            display: block;
+
+        .love-word.show {
             opacity: 1;
             transform: scale(1);
         }
@@ -87,22 +62,40 @@
 </head>
 <body>
 
-    <h2>اضغط على القلب علشان تشوف رسالة الحب ❤️</h2>
-
-    <div class="heart-container" onclick="showMessage()">
-        <div class="heart"></div>
-        <div class="text-inside">اضغطي هنا</div>
-    </div>
-
-    <div id="message">Love you ❤️</div>
+    <button class="click-btn" onclick="createDenseHeart()">اضغط هنا يا حب ❤️</button>
+    <div class="heart-container" id="heartContainer"></div>
 
     <script>
-        function showMessage() {
-            var msg = document.getElementById('message');
-            msg.style.display = 'block';
-            setTimeout(function() {
-                msg.classList.add('show');
-            }, 10);
+        function createDenseHeart() {
+            const container = document.getElementById('heartContainer');
+            container.innerHTML = '';
+
+            const points = [];
+            
+            for (let t = 0; t < Math.PI * 2; t += 0.05) {
+                let x = 16 * Math.pow(Math.sin(t), 3);
+                let y = -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
+                
+                points.push({ x: x * 13 + 225, y: y * 13 + 200 });
+                points.push({ x: x * 10 + 225, y: y * 10 + 200 });
+                points.push({ x: x * 7 + 225, y: y * 7 + 200 });
+                points.push({ x: x * 4 + 225, y: y * 4 + 200 });
+            }
+
+            points.forEach((point, index) => {
+                const word = document.createElement('div');
+                word.className = 'love-word';
+                word.innerText = 'Love You';
+                
+                word.style.left = point.x + 'px';
+                word.style.top = point.y + 'px';
+                
+                container.appendChild(word);
+
+                setTimeout(() => {
+                    word.classList.add('show');
+                }, index * 5);
+            });
         }
     </script>
 
