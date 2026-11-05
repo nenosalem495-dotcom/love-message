@@ -2,146 +2,142 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أغلى الحبايب - وردة سحرية</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">car
+    <title>UL BOB Animation</title>
     <style>
         body {
+            margin: 0;
+            background-color: #1a1a1a;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            background-color: #0c0c0c;
+            justify-content: center;
+            height: 100vh;
             font-family: Arial, sans-serif;
             overflow: hidden;
-            margin: 0;
+            color: white;
         }
 
-        /* زرار البداية */
-        .click-btn {
-            padding: 14px 32px;
+        /* ملعب كرة قدم مبسط */
+        .field {
+            position: relative;
+            width: 800px;
+            height: 300px;
+            background: linear-gradient(to bottom, #2e7d32, #1b5e20);
+            border: 4px solid white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+
+        /* المرمى */
+        .goal {
+            position: absolute;
+            left: 0;
+            top: 75px;
+            width: 50px;
+            height: 150px;
+            border: 4px solid white;
+            border-left: none;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* اللاعب */
+        #player {
+            position: absolute;
+            bottom: 120px;
+            left: 50px;
+            font-size: 40px;
+            transition: transform 1.5s ease-in-out;
+            z-index: 2;
+        }
+
+        /* الكرة */
+        #ball {
+            position: absolute;
+            bottom: 135px;
+            left: 85px;
             font-size: 20px;
-            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            transition: all 1s ease-in-out;
+            z-index: 2;
+        }
+
+        /* زر التشغيل */
+        button {
+            margin-top: 20px;
+            padding: 12px 25px;
+            font-size: 18px;
+            font-weight: bold;
+            background-color: #ff9800;
             color: white;
             border: none;
-            border-radius: 30px;
+            border-radius: 5px;
             cursor: pointer;
-            box-shadow: 0 5px 20px rgba(255, 65, 108, 0.5);
-            transition: 0.3s;
-            z-index: 10;
-            margin-bottom: 30px;
-            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            transition: 0.2s;
         }
 
-        .click-btn:hover {
-            transform: scale(1.08);
-            box-shadow: 0 8px 25px rgba(255, 65, 108, 0.8);
+        button:hover {
+            background-color: #f57c00;
         }
 
-        /* حاوية الوردة */
-        .flower-container {
-            position: relative;
-            width: 350px;
-            height: 350px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* بتلات الوردة (بتتوزع بشكل دائري عشان تعمل شكل الوردة) */
-        .petal {
+        /* ظهور الاسم UL BOB */
+        #ul-bob {
             position: absolute;
-            width: 100px;
-            height: 140px;
-            background: linear-gradient(to top, #ff1a53, #ff6685);
-            border-radius: 50% 50% 20% 20%;
+            font-size: 60px;
+            font-weight: bold;
+            color: #ffd700;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 2px 2px 4px rgba(0,0,0,0.8);
             opacity: 0;
-            transform: scale(0) rotate(0deg);
+            transform: scale(0.5);
             transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 0 15px rgba(255, 26, 83, 0.5);
-            transform-origin: bottom center;
-        }
-
-        /* قلب الوردة في المنتصف (مكتوب فيه الكلمة) */
-        .flower-center {
-            position: absolute;
-            width: 120px;
-            height: 120px;
-            background: radial-gradient(circle, #ffb3c6, #ff3366);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            opacity: 0;
-            transform: scale(0);
-            transition: all 0.6s ease-in-out 0.8s; /* تظهر بعد اكتمال بتلات الوردة */
-            box-shadow: 0 0 25px rgba(255, 51, 102, 0.8);
             z-index: 5;
-            padding: 10px;
-            box-sizing: border-box;
-            line-height: 1.4;
-        }
-
-        /* حالة ظهور الوردة والقلب */
-        .petal.show {
-            opacity: 0.9;
-        }
-
-        .flower-center.show {
-            opacity: 1;
-            transform: scale(1);
         }
     </style>
 </head>
 <body>
 
-    <button class="click-btn" onclick="openFlower()">اضغط هنا لاكتشاف الهدية 🌹</button>
-    
-    <div class="flower-container" id="flowerContainer">
-        <!-- قلب الوردة اللي مكتوب فيه الجملة -->
-        <div class="flower-center" id="flowerCenter">إلى أغلى الحبايب ❤️</div>
+    <div class="field">
+        <div class="goal"></div>
+        <div id="player">🏃‍♂️</div>
+        <div id="ball">⚽</div>
+        <div id="ul-bob">UL BOB</div>
     </div>
 
+    <button onclick="playAnimation()">ابدأ الحركة</button>
+
     <script>
-        function openFlower() {
-            const container = document.getElementById('flowerContainer');
-            const centerText = document.getElementById('flowerCenter');
-            
-            // مسح أي بتلات قديمة لو تم الضغط مرة تانية
-            const oldPetals = container.querySelectorAll('.petal');
-            oldPetals.forEach(p => p.remove());
+        function playAnimation() {
+            const player = document.getElementById('player');
+            const ball = document.getElementById('ball');
+            const ulBob = document.getElementById('ul-bob');
 
-            centerText.classList.remove('show');
+            // إعادة تعيين العناصر لمكانها الأصلي لو تم الضغط مرة أخرى
+            player.style.transform = 'translateX(0px)';
+            ball.style.transform = 'translate(0px, 0px)';
+            ulBob.style.opacity = '0';
+            ulBob.style.transform = 'scale(0.5)';
 
-            // عدد بتلات الوردة (مثلاً 12 بتلة متوزعة بدائرة كاملة 360 درجة)
-            const totalPetals = 12;
-            
-            for (let i = 0; i < totalPetals; i++) {
-                const angle = (i * 360) / totalPetals; // حساب الزاوية لكل بتلة
-                
-                const petal = document.createElement('div');
-                petal.className = 'petal';
-                
-                // تدوير البتلة في مكانها الصحيح بناءً على زاويتها الدائرية
-                petal.style.transform = `rotate(${angle}deg) translateY(-60px) scale(0)`;
-                
-                container.appendChild(petal);
-
-                // حركة تفتح البتلات تدريجياً
-                setTimeout(() => {
-                    petal.classList.add('show');
-                    petal.style.transform = `rotate(${angle}deg) translateY(-60px) scale(1)`;
-                }, i * 70); // سرعة تفتح كل بتلة ورا التانية
-            }
-
-            // إظهار نص "إلى أغلى الحبايب" في المنتصف بعد ما الوردة تتفتح
             setTimeout(() => {
-                centerText.classList.add('show');
-            }, totalPetals * 70 + 200);
+                // 1. يتحرك اللاعب ومعه الكرة نحو المنتصف (جري)
+                player.style.transform = 'translateX(350px)';
+                ball.style.transform = 'translateX(350px)';
+
+                // 2. بعد أن يصل اللاعب، يشوت الكرة نحو الجون وتظهر كلمة UL BOB
+                setTimeout(() => {
+                    // حركة الشوط (تتحرك الكرة بسرعة لليسار داخل الجون، ويرتفع اللاعب قليلاً للاحتفال)
+                    ball.style.transform = 'translate(-380px, -20px) rotate(360deg)';
+                    player.style.transform = 'translateX(330px) translateY(-10px)';
+
+                    // ظهور اسم UL BOB في منتصف الملعب
+                    setTimeout(() => {
+                        ulBob.style.opacity = '1';
+                        ulBob.style.transform = 'scale(1)';
+                    }, 500);
+
+                }, 1500);
+
+            }, 100);
         }
     </script>
 
