@@ -3,173 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UL BOB - Digital Football</title>
+    <title>تواصل مع المهندس Abd ul rahman</title>
     <style>
         body {
             margin: 0;
-            background-color: #0f172a;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100vh;
-            font-family: 'Courier New', Courier, monospace;
-            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: white;
-        }
-
-        /* الملعب أو شاشة العرض الرقمية */
-        .field {
-            position: relative;
-            width: 800px;
-            height: 350px;
-            background: radial-gradient(circle, #1e293b 0%, #0f172a 100%);
-            border: 3px solid #38bdf8;
-            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 0 30px rgba(56, 189, 248, 0.2);
         }
 
-        /* المرمى في الجهة اليمنى أو اليسرى */
-        .goal {
-            position: absolute;
-            left: 20px;
-            top: 100px;
-            width: 40px;
-            height: 150px;
-            border: 3px dashed #38bdf8;
-            border-left: none;
-            background: rgba(56, 189, 248, 0.05);
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            max-width: 450px;
+            width: 90%;
         }
 
-        /* اللاعب المصنوع من أرقام */
-        #digital-player {
-            position: absolute;
-            bottom: 120px;
-            left: 100px;
-            font-size: 32px;
-            font-weight: bold;
-            color: #4ade80;
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px rgba(74, 222, 128, 0.6);
-            transition: transform 1.5s ease-in-out;
-            z-index: 2;
-        }
-
-        /* الكرة المصنوعة من رقم */
-        #digital-ball {
-            position: absolute;
-            bottom: 130px;
-            left: 170px;
-            font-size: 24px;
-            font-weight: bold;
-            color: #f43f5e;
-            text-shadow: 0 0 10px rgba(244, 63, 94, 0.8);
-            transition: all 1s cubic-bezier(0.25, 1, 0.5, 1);
-            z-index: 2;
-        }
-
-        /* زر التشغيل */
-        button {
-            margin-top: 25px;
-            padding: 12px 30px;
+        /* تنسيق الأزرار */
+        .custom-btn {
+            background: linear-gradient(45deg, #38bdf8, #0284c7);
+            color: white;
+            border: none;
+            padding: 14px 30px;
             font-size: 18px;
             font-weight: bold;
-            background-color: #38bdf8;
-            color: #0f172a;
-            border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4);
-            transition: 0.2s;
+            transition: all 0.3s ease;
         }
 
-        button:hover {
-            background-color: #0ea5e9;
-            transform: scale(1.05);
+        .custom-btn:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(45deg, #0ea5e9, #0369a1);
+            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.6);
         }
 
-        /* ظهور اسم UL BOB بمنتصف الشاشة */
-        #ul-bob {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.3);
-            font-size: 70px;
-            font-weight: 900;
-            color: #facc15;
-            text-shadow: 0 0 25px rgba(250, 204, 21, 0.9), 0 0 50px rgba(250, 204, 21, 0.5);
+        /* رسالة الترحيب */
+        #welcome-message {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: 650;
+            color: #f8fafc;
+            line-height: 1.6;
             opacity: 0;
-            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 10;
-            letter-spacing: 4px;
+            transform: translateY(-10px);
+            transition: all 0.5s ease;
         }
 
-        /* تأثير اهتزاز الشاشة عند الشوط */
-        @keyframes shake {
-            0% { transform: translate(0, 0); }
-            20% { transform: translate(-8px, 5px); }
-            40% { transform: translate(8px, -5px); }
-            60% { transform: translate(-5px, -3px); }
-            80% { transform: translate(5px, 3px); }
-            100% { transform: translate(0, 0); }
+        .show {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
         }
 
-        .shake-effect {
-            animation: shake 0.4s ease-in-out;
+        /* الزر الثاني */
+        #second-step {
+            margin-top: 20px;
+            display: none;
+        }
+
+        /* صندوق الرقم */
+        #phone-box {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #4ade80;
+            background: rgba(74, 222, 128, 0.1);
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px dashed #4ade80;
+            display: none;
+            letter-spacing: 2px;
         }
     </style>
 </head>
 <body>
 
-    <div class="field" id="game-field">
-        <div class="goal"></div>
-        <!-- اللاعب يتكون من أرقام بشكل مبدع -->
-        <div id="digital-player">01[🏃]10</div>
-        <!-- الكرة تتكون من رقم مميز -->
-        <div id="digital-ball">0</div>
-        
-        <div id="ul-bob">UL BOB</div>
+    <div class="card">
+        <!-- الزر الأول -->
+        <button id="btn-1" class="custom-btn" onclick="showWelcome()">اضغط هنا</button>
+
+        <!-- رسالة الترحيب -->
+        <div id="welcome-message">
+            أهلاً بك معاك المهندس Abd ul rahman للاستفسار عن حاجة 👇
+        </div>
+
+        <!-- الزر الثاني (مخفي في البداية) -->
+        <div id="second-step">
+            <button class="custom-btn" onclick="showPhone()">اضغط هنا</button>
+        </div>
+
+        <!-- صندوق ظهور الرقم -->
+        <div id="phone-box">
+            01016198638
+        </div>
     </div>
 
-    <button onclick="startDigitalAnimation()">تشغيل العرض</button>
-
     <script>
-        function startDigitalAnimation() {
-            const player = document.getElementById('digital-player');
-            const ball = document.getElementById('digital-ball');
-            const ulBob = document.getElementById('ul-bob');
-            const field = document.getElementById('game-field');
+        function showWelcome() {
+            // إخفاء الزر الأول بعد الضغط
+            document.getElementById('btn-1').style.display = 'none';
+            
+            // إظهار رسالة الترحيب بانسيابية
+            const msg = document.getElementById('welcome-message');
+            msg.classList.add('show');
 
-            // إعادة تعيين الحالة الأولى
-            player.style.transform = 'translateX(0px)';
-            ball.style.transform = 'translate(0px, 0px)';
-            ulBob.style.opacity = '0';
-            ulBob.style.transform = 'translate(-50%, -50%) scale(0.3)';
-            field.classList.remove('shake-effect');
-
+            // إظهار الزر الثاني بعد ظهور الرسالة بـ 500 ملي ثانية
             setTimeout(() => {
-                // 1. اللاعب يجري ومعه الكرة ناحية اليسار نحو المرمى
-                player.style.transform = 'translateX(-70px)';
-                ball.style.transform = 'translateX(-70px)';
+                document.getElementById('second-step').style.display = 'block';
+            }, 500);
+        }
 
-                // 2. بعد الوصول، يشوت الكرة بقوة لتصطدم بالشاشة/المرمى
-                setTimeout(() => {
-                    // حركة الشوط السريعة جداً للكرة ودخولها الجون
-                    ball.style.transform = 'translate(-120px, -15px) scale(1.5) rotate(720deg)';
-                    
-                    // اهتزاز الشاشة عند الاصطدام
-                    field.classList.add('shake-effect');
-
-                    // 3. ظهور اسم UL BOB في وسط الشاشة ب1بأناقة
-                    setTimeout(() => {
-                        ulBob.style.opacity = '1';
-                        ulBob.style.transform = 'translate(-50%, -50%) scale(1)';
-                    }, 300);
-
-                }, 1400);
-
-            }, 100);
+        function showPhone() {
+            // إخفاء الزر الثاني بعد الضغط
+            document.getElementById('second-step').style.display = 'none';
+            
+            // إظهار الرقم مباشرة
+            const phoneBox = document.getElementById('phone-box');
+            phoneBox.style.display = 'block';
+            phoneBox.classList.add('show');
         }
     </script>
 
