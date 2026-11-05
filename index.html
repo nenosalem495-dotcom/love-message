@@ -2,140 +2,172 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">car
-    <title>UL BOB Animation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UL BOB - Digital Football</title>
     <style>
         body {
             margin: 0;
-            background-color: #1a1a1a;
+            background-color: #0f172a;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100vh;
-            font-family: Arial, sans-serif;
+            font-family: 'Courier New', Courier, monospace;
             overflow: hidden;
             color: white;
         }
 
-        /* ملعب كرة قدم مبسط */
+        /* الملعب أو شاشة العرض الرقمية */
         .field {
             position: relative;
             width: 800px;
-            height: 300px;
-            background: linear-gradient(to bottom, #2e7d32, #1b5e20);
-            border: 4px solid white;
-            border-radius: 10px;
+            height: 350px;
+            background: radial-gradient(circle, #1e293b 0%, #0f172a 100%);
+            border: 3px solid #38bdf8;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.2);
         }
 
-        /* المرمى */
+        /* المرمى في الجهة اليمنى أو اليسرى */
         .goal {
             position: absolute;
-            left: 0;
-            top: 75px;
-            width: 50px;
+            left: 20px;
+            top: 100px;
+            width: 40px;
             height: 150px;
-            border: 4px solid white;
+            border: 3px dashed #38bdf8;
             border-left: none;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(56, 189, 248, 0.05);
         }
 
-        /* اللاعب */
-        #player {
+        /* اللاعب المصنوع من أرقام */
+        #digital-player {
             position: absolute;
             bottom: 120px;
-            left: 50px;
-            font-size: 40px;
+            left: 100px;
+            font-size: 32px;
+            font-weight: bold;
+            color: #4ade80;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(74, 222, 128, 0.6);
             transition: transform 1.5s ease-in-out;
             z-index: 2;
         }
 
-        /* الكرة */
-        #ball {
+        /* الكرة المصنوعة من رقم */
+        #digital-ball {
             position: absolute;
-            bottom: 135px;
-            left: 85px;
-            font-size: 20px;
-            transition: all 1s ease-in-out;
+            bottom: 130px;
+            left: 170px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #f43f5e;
+            text-shadow: 0 0 10px rgba(244, 63, 94, 0.8);
+            transition: all 1s cubic-bezier(0.25, 1, 0.5, 1);
             z-index: 2;
         }
 
         /* زر التشغيل */
         button {
-            margin-top: 20px;
-            padding: 12px 25px;
+            margin-top: 25px;
+            padding: 12px 30px;
             font-size: 18px;
             font-weight: bold;
-            background-color: #ff9800;
-            color: white;
+            background-color: #38bdf8;
+            color: #0f172a;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4);
             transition: 0.2s;
         }
 
         button:hover {
-            background-color: #f57c00;
+            background-color: #0ea5e9;
+            transform: scale(1.05);
         }
 
-        /* ظهور الاسم UL BOB */
+        /* ظهور اسم UL BOB بمنتصف الشاشة */
         #ul-bob {
             position: absolute;
-            font-size: 60px;
-            font-weight: bold;
-            color: #ffd700;
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 2px 2px 4px rgba(0,0,0,0.8);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.3);
+            font-size: 70px;
+            font-weight: 900;
+            color: #facc15;
+            text-shadow: 0 0 25px rgba(250, 204, 21, 0.9), 0 0 50px rgba(250, 204, 21, 0.5);
             opacity: 0;
-            transform: scale(0.5);
-            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 5;
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 10;
+            letter-spacing: 4px;
+        }
+
+        /* تأثير اهتزاز الشاشة عند الشوط */
+        @keyframes shake {
+            0% { transform: translate(0, 0); }
+            20% { transform: translate(-8px, 5px); }
+            40% { transform: translate(8px, -5px); }
+            60% { transform: translate(-5px, -3px); }
+            80% { transform: translate(5px, 3px); }
+            100% { transform: translate(0, 0); }
+        }
+
+        .shake-effect {
+            animation: shake 0.4s ease-in-out;
         }
     </style>
 </head>
 <body>
 
-    <div class="field">
+    <div class="field" id="game-field">
         <div class="goal"></div>
-        <div id="player">🏃‍♂️</div>
-        <div id="ball">⚽</div>
+        <!-- اللاعب يتكون من أرقام بشكل مبدع -->
+        <div id="digital-player">01[🏃]10</div>
+        <!-- الكرة تتكون من رقم مميز -->
+        <div id="digital-ball">0</div>
+        
         <div id="ul-bob">UL BOB</div>
     </div>
 
-    <button onclick="playAnimation()">ابدأ الحركة</button>
+    <button onclick="startDigitalAnimation()">تشغيل العرض</button>
 
     <script>
-        function playAnimation() {
-            const player = document.getElementById('player');
-            const ball = document.getElementById('ball');
+        function startDigitalAnimation() {
+            const player = document.getElementById('digital-player');
+            const ball = document.getElementById('digital-ball');
             const ulBob = document.getElementById('ul-bob');
+            const field = document.getElementById('game-field');
 
-            // إعادة تعيين العناصر لمكانها الأصلي لو تم الضغط مرة أخرى
+            // إعادة تعيين الحالة الأولى
             player.style.transform = 'translateX(0px)';
             ball.style.transform = 'translate(0px, 0px)';
             ulBob.style.opacity = '0';
-            ulBob.style.transform = 'scale(0.5)';
+            ulBob.style.transform = 'translate(-50%, -50%) scale(0.3)';
+            field.classList.remove('shake-effect');
 
             setTimeout(() => {
-                // 1. يتحرك اللاعب ومعه الكرة نحو المنتصف (جري)
-                player.style.transform = 'translateX(350px)';
-                ball.style.transform = 'translateX(350px)';
+                // 1. اللاعب يجري ومعه الكرة ناحية اليسار نحو المرمى
+                player.style.transform = 'translateX(-70px)';
+                ball.style.transform = 'translateX(-70px)';
 
-                // 2. بعد أن يصل اللاعب، يشوت الكرة نحو الجون وتظهر كلمة UL BOB
+                // 2. بعد الوصول، يشوت الكرة بقوة لتصطدم بالشاشة/المرمى
                 setTimeout(() => {
-                    // حركة الشوط (تتحرك الكرة بسرعة لليسار داخل الجون، ويرتفع اللاعب قليلاً للاحتفال)
-                    ball.style.transform = 'translate(-380px, -20px) rotate(360deg)';
-                    player.style.transform = 'translateX(330px) translateY(-10px)';
+                    // حركة الشوط السريعة جداً للكرة ودخولها الجون
+                    ball.style.transform = 'translate(-120px, -15px) scale(1.5) rotate(720deg)';
+                    
+                    // اهتزاز الشاشة عند الاصطدام
+                    field.classList.add('shake-effect');
 
-                    // ظهور اسم UL BOB في منتصف الملعب
+                    // 3. ظهور اسم UL BOB في وسط الشاشة ب1بأناقة
                     setTimeout(() => {
                         ulBob.style.opacity = '1';
-                        ulBob.style.transform = 'scale(1)';
-                    }, 500);
+                        ulBob.style.transform = 'translate(-50%, -50%) scale(1)';
+                    }, 300);
 
-                }, 1500);
+                }, 1400);
 
             }, 100);
         }
