@@ -2,33 +2,79 @@
 <html lang="ar">
 <head>
     <meta charset="UTF-8">
-    <title>SYSTEM_OVERRIDE // SECURE_CORE</title>
+    <title>SYSTEM_OVERRIDE // CRITICAL_SECURITY_BREACH</title>
     <style>
         body {
             background-color: #000;
             color: #00ff66;
             font-family: monospace;
             padding: 20px;
-            font-size: 18px;
+            font-size: 16px;
             overflow: hidden;
+            margin: 0;
         }
         .glitch {
             text-shadow: 2px 0 red, -2px 0 cyan;
+        }
+        .hacked-screen {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #3b0000;
+            color: #ff0000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            font-family: monospace;
+            z-index: 999;
+        }
+        .hacked-screen h1 {
+            font-size: 45px;
+            text-shadow: 3px 3px 10px #000;
+            margin: 0;
+            animation: flicker 1s infinite alternate;
+        }
+        @keyframes flicker {
+            0% { opacity: 1; }
+            50% { opacity: 0.4; }
+            100% { opacity: 1; }
         }
     </style>
 </head>
 <body>
     <div id="terminal"></div>
+
+    <div class="hacked-screen" id="hackedScreen">
+        <h1>⚠️ تم اختراق جهازك ⚠️</h1>
+        <br>
+        <h2 style="color: #fff; font-size: 30px;">من قبل Abd ul rahman</h2>
+        <p style="color: #ff9999; font-size: 18px; margin-top: 20px;">جميع بياناتك أصبحت تحت السيطرة الكاملة...</p>
+    </div>
+
     <script>
         const terminal = document.getElementById('terminal');
+        const hackedScreen = document.getElementById('hackedScreen');
+        
         const lines = [
-            "[*] Initializing Quantum Core...",
-            "[!] WARNING: Bypassing mainframe firewall...",
-            "[x] Access granted to root permissions.",
-            "[+] Decrypting classified database...",
-            "----------------------------------------",
-            "STATUS: IMPOSSIBLE ALGORITHM BYPASSED.",
-            "WELCOME, MASTER. SYSTEM FULLY COMPROMISED."
+            "[*] Initializing dark_kernel_v4.9...",
+            "[*] Scanning target architecture...",
+            "[+] Target IP acquired: 192.168.1.105 [SECURE]",
+            "[!] Bypassing local firewall layers [1/4]...",
+            "[!] Bypassing local firewall layers [2/4]...",
+            "[+] Firewall completely neutralized.",
+            "[*] Extracting system registry and credentials...",
+            "[*] Accessing webcam and microphone drivers...",
+            "[+] Found 48 hidden partitions. Mounting...",
+            "[*] Injecting payload into system memory...",
+            "[!] WARNING: Critical kernel panic imminent...",
+            "--------------------------------------------------",
+            "[*] Decrypting master access tokens...",
+            "[*] Establishing secure backdoor connection...",
+            "[*] FINALIZING OVERRIDE..."
         ];
         
         let i = 0;
@@ -36,16 +82,28 @@
             if (i < lines.length) {
                 terminal.innerHTML += lines[i] + "<br>";
                 i++;
-                setTimeout(typeLine, 800);
+                setTimeout(typeLine, 600);
             } else {
-                setInterval(() => {
+                // بعدها نبدأ نلخبط الشاشة بسطور وهمية مرعبة لفترة قصيرة
+                let count = 0;
+                let floodInterval = setInterval(() => {
+                    let randomHex = '0x' + Math.floor(Math.random()*16777215).toString(16).toUpperCase();
                     let randomStr = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-                    terminal.innerHTML += `<span class="glitch">[SYS_LOG] ${randomStr}</span><br>`;
+                    terminal.innerHTML += `<span class="glitch">[DUMP] ${randomHex} - MEM_LEAK_${randomStr}</span><br>`;
                     window.scrollTo(0, document.body.scrollHeight);
-                }, 50);
+                    count++;
+                    
+                    if (count > 35) {
+                        clearInterval(floodInterval);
+                        // إظهار شاشة الاختراق النهائية
+                        setTimeout(() => {
+                            hackedScreen.style.display = 'flex';
+                        }, 1000);
+                    }
+                }, 40);
             }
         }
-        setTimeout(typeLine, 500);
+        setTimeout(typeLine, 400);
     </script>
 </body>
 </html>
