@@ -2,16 +2,18 @@
 <html lang="ar">
 <head>
     <meta charset="UTF-8">
-    <title>SYSTEM_OVERRIDE // CRITICAL_SECURITY_BREACH</title>
+    <title>SYSTEM_CRITICAL_OVERRIDE</title>
     <style>
         body {
             background-color: #000;
             color: #00ff66;
             font-family: monospace;
-            padding: 20px;
-            font-size: 16px;
+            padding: 15px;
+            font-size: 14px;
             overflow: hidden;
             margin: 0;
+            white-space: pre-wrap;
+            word-break: break-all;
         }
         .glitch {
             text-shadow: 2px 0 red, -2px 0 cyan;
@@ -21,27 +23,25 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
             background-color: #3b0000;
             color: #ff0000;
             justify-content: center;
             align-items: center;
             flex-direction: column;
             text-align: center;
-            font-family: monospace;
             z-index: 999;
         }
         .hacked-screen h1 {
-            font-size: 45px;
-            text-shadow: 3px 3px 10px #000;
+            font-size: 50px;
+            text-shadow: 4px 4px 15px #000;
             margin: 0;
-            animation: flicker 1s infinite alternate;
+            animation: flicker 0.8s infinite alternate;
         }
         @keyframes flicker {
-            0% { opacity: 1; }
-            50% { opacity: 0.4; }
-            100% { opacity: 1; }
+            0% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0.3; transform: scale(1.02); }
         }
     </style>
 </head>
@@ -51,59 +51,34 @@
     <div class="hacked-screen" id="hackedScreen">
         <h1>⚠️ تم اختراق جهازك ⚠️</h1>
         <br>
-        <h2 style="color: #fff; font-size: 30px;">من قبل Abd ul rahman</h2>
-        <p style="color: #ff9999; font-size: 18px; margin-top: 20px;">جميع بياناتك أصبحت تحت السيطرة الكاملة...</p>
+        <h2 style="color: #fff; font-size: 35px;">من قبل Abd ul rahman</h2>
+        <p style="color: #ff9999; font-size: 20px; margin-top: 15px;">سيطر النظام بالكامل على الكاميرا، الملفات، والشبكة الخاصة بك...</p>
     </div>
 
     <script>
         const terminal = document.getElementById('terminal');
         const hackedScreen = document.getElementById('hackedScreen');
         
-        const lines = [
-            "[*] Initializing dark_kernel_v4.9...",
-            "[*] Scanning target architecture...",
-            "[+] Target IP acquired: 192.168.1.105 [SECURE]",
-            "[!] Bypassing local firewall layers [1/4]...",
-            "[!] Bypassing local firewall layers [2/4]...",
-            "[+] Firewall completely neutralized.",
-            "[*] Extracting system registry and credentials...",
-            "[*] Accessing webcam and microphone drivers...",
-            "[+] Found 48 hidden partitions. Mounting...",
-            "[*] Injecting payload into system memory...",
-            "[!] WARNING: Critical kernel panic imminent...",
-            "--------------------------------------------------",
-            "[*] Decrypting master access tokens...",
-            "[*] Establishing secure backdoor connection...",
-            "[*] FINALIZING OVERRIDE..."
-        ];
+        // كلمات وسطور تملى الشاشة بالعرض والطول بشكل مرعب
+        const words = ["OVERRIDE", "BYPASS", "KERNEL_PANIC", "ROOT_ACCESS", "0x9F4C", "ENCRYPTED", "SYS_BREACH", "MEMORY_DUMP", "FIREWALL_DOWN", "INJECTING_PAYLOAD", "10101101", "MALWARE_ACTIVE"];
         
-        let i = 0;
-        function typeLine() {
-            if (i < lines.length) {
-                terminal.innerHTML += lines[i] + "<br>";
-                i++;
-                setTimeout(typeLine, 600);
-            } else {
-                // بعدها نبدأ نلخبط الشاشة بسطور وهمية مرعبة لفترة قصيرة
-                let count = 0;
-                let floodInterval = setInterval(() => {
-                    let randomHex = '0x' + Math.floor(Math.random()*16777215).toString(16).toUpperCase();
-                    let randomStr = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-                    terminal.innerHTML += `<span class="glitch">[DUMP] ${randomHex} - MEM_LEAK_${randomStr}</span><br>`;
-                    window.scrollTo(0, document.body.scrollHeight);
-                    count++;
-                    
-                    if (count > 35) {
-                        clearInterval(floodInterval);
-                        // إظهار شاشة الاختراق النهائية
-                        setTimeout(() => {
-                            hackedScreen.style.display = 'flex';
-                        }, 1000);
-                    }
-                }, 40);
+        let floodTimer = setInterval(() => {
+            let line = "";
+            // تخلي السطر الواحد يملى عرض الشاشة بكلمات عشوائية وسريعة
+            for(let j=0; j < 12; j++) {
+                let randomWord = words[Math.floor(Math.random() * words.length)];
+                let randomHex = Math.floor(Math.random()*999999);
+                line += `[SYS_${randomHex}]_${randomWord}  `;
             }
-        }
-        setTimeout(typeLine, 400);
+            terminal.innerHTML += `<span class="glitch">${line}</span><br>`;
+            window.scrollTo(0, document.body.scrollHeight);
+        }, 30);
+
+        // بعد 5 ثواني من الرعب والملء بالعرض، الشاشة تقفل وتجيب اسمك
+        setTimeout(() => {
+            clearInterval(floodTimer);
+            hackedScreen.style.display = 'flex';
+        }, 5000);
     </script>
 </body>
 </html>
