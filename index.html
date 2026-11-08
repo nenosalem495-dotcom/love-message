@@ -1,139 +1,22 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تواصل مع المهندس Abd ul rahman</title>
-    <style>
-        body {
-            margin: 0;
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: white;
-            overflow: hidden;
-        }
+import sys
+import time
+import random
 
-        .card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
-            max-width: 450px;
-            width: 90%;
-        }
+def matrix_effect():
+    print("[*] Initializing Quantum Core...")
+    time.sleep(1)
+    print("[!] WARNING: Bypassing mainframe firewall...")
+    time.sleep(1.5)
+    
+    chars = "0101010101010101_CRACKED_SECURE_KERNEL_BYPASS"
+    for i in range(100):
+        line = "".join(random.choice(chars) for _ in range(60))
+        sys.stdout.write(f"\r[SYS_ACCESS] {line}")
+        sys.stdout.flush()
+        time.sleep(0.03)
+        
+    print("\n\n[+] SUCCESS: Impossible algorithm executed successfully.")
+    print("[+] Welcome, Master. The system is yours.")
 
-        /* تنسيق الأزرار */
-        .custom-btn {
-            background: linear-gradient(45deg, #38bdf8, #0284c7);
-            color: white;
-            border: none;
-            padding: 14px 30px;
-            font-size: 18px;
-            font-weight: bold;
-            border-radius: 10px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4);
-            transition: all 0.3s ease;
-        }
-
-        .custom-btn:hover {
-            transform: translateY(-2px);
-            background: linear-gradient(45deg, #0ea5e9, #0369a1);
-            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.6);
-        }
-
-        /* رسالة الترحيب */
-        #welcome-message {
-            margin-top: 20px;
-            font-size: 20px;
-            font-weight: 650;
-            color: #f8fafc;
-            line-height: 1.6;
-            opacity: 0;
-            transform: translateY(-10px);
-            transition: all 0.5s ease;
-        }
-
-        .show {
-            opacity: 1 !important;
-            transform: translateY(0) !important;
-        }
-
-        /* الزر الثاني */
-        #second-step {
-            margin-top: 20px;
-            display: none;
-        }
-
-        /* صندوق الرقم */
-        #phone-box {
-            margin-top: 20px;
-            font-size: 24px;
-            font-weight: bold;
-            color: #4ade80;
-            background: rgba(74, 222, 128, 0.1);
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px dashed #4ade80;
-            display: none;
-            letter-spacing: 2px;
-        }
-    </style>
-</head>
-<body>
-
-    <div class="card">
-        <!-- الزر الأول -->
-        <button id="btn-1" class="custom-btn" onclick="showWelcome()">اضغط هنا</button>
-
-        <!-- رسالة الترحيب -->
-        <div id="welcome-message">
-            أهلاً بك معاك المهندس Abd ul rahman للاستفسار عن حاجة 👇
-        </div>
-
-        <!-- الزر الثاني (مخفي في البداية) -->
-        <div id="second-step">
-            <button class="custom-btn" onclick="showPhone()">اضغط هنا</button>
-        </div>
-
-        <!-- صندوق ظهور الرقم -->
-        <div id="phone-box">
-            01016198638
-        </div>
-    </div>
-
-    <script>
-        function showWelcome() {
-            // إخفاء الزر الأول بعد الضغط
-            document.getElementById('btn-1').style.display = 'none';
-            
-            // إظهار رسالة الترحيب بانسيابية
-            const msg = document.getElementById('welcome-message');
-            msg.classList.add('show');
-
-            // إظهار الزر الثاني بعد ظهور الرسالة بـ 500 ملي ثانية
-            setTimeout(() => {
-                document.getElementById('second-step').style.display = 'block';
-            }, 500);
-        }
-
-        function showPhone() {
-            // إخفاء الزر الثاني بعد الضغط
-            document.getElementById('second-step').style.display = 'none';
-            
-            // إظهار الرقم مباشرة
-            const phoneBox = document.getElementById('phone-box');
-            phoneBox.style.display = 'block';
-            phoneBox.classList.add('show');
-        }
-    </script>
-
-</body>
-</html>
+if __name__ == "__main__":
+    matrix_effect()
