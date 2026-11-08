@@ -1,23 +1,51 @@
-import sys
-import time
-import random
-
-def matrix_effect():
-    print("[*] Initializing Quantum Core...")
-    time.sleep(1)
-    print("[!] WARNING: Bypassing mainframe firewall...")
-    time.sleep(1.5)
-    
-    chars = "0101010101010101_CRACKED_SECURE_KERNEL_BYPASS"
-    for i in range(100):
-        line = "".join(random.choice(chars) for _ in range(60))
-        sys.stdout.write(f"\r[SYS_ACCESS] {line}")
-        sys.stdout.flush()
-        time.sleep(0.03)
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>SYSTEM_OVERRIDE // SECURE_CORE</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #00ff66;
+            font-family: monospace;
+            padding: 20px;
+            font-size: 18px;
+            overflow: hidden;
+        }
+        .glitch {
+            text-shadow: 2px 0 red, -2px 0 cyan;
+        }
+    </style>
+</head>
+<body>
+    <div id="terminal"></div>
+    <script>
+        const terminal = document.getElementById('terminal');
+        const lines = [
+            "[*] Initializing Quantum Core...",
+            "[!] WARNING: Bypassing mainframe firewall...",
+            "[x] Access granted to root permissions.",
+            "[+] Decrypting classified database...",
+            "----------------------------------------",
+            "STATUS: IMPOSSIBLE ALGORITHM BYPASSED.",
+            "WELCOME, MASTER. SYSTEM FULLY COMPROMISED."
+        ];
         
-    print("\n\n[+] SUCCESS: Impossible algorithm executed successfully.")
-    print("[+] Welcome, Master. The system is yours.")
-
-if __name__ == "__main__":
-    matrix_effect()
-
+        let i = 0;
+        function typeLine() {
+            if (i < lines.length) {
+                terminal.innerHTML += lines[i] + "<br>";
+                i++;
+                setTimeout(typeLine, 800);
+            } else {
+                setInterval(() => {
+                    let randomStr = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+                    terminal.innerHTML += `<span class="glitch">[SYS_LOG] ${randomStr}</span><br>`;
+                    window.scrollTo(0, document.body.scrollHeight);
+                }, 50);
+            }
+        }
+        setTimeout(typeLine, 500);
+    </script>
+</body>
+</html>
